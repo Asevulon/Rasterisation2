@@ -107,12 +107,15 @@ void VerticalStep(int& y, int& c)
 
 void DrawCircleBrezenhem(HDC hdc,int x1, int y1, int R, COLORREF color)
 {
-	int x = x1;
-	int y = R + y1;
+	int x = 0;
+	int y = R;
 	int c = 2 * (1 - R);
-	while (y > y1)
+	while (y > 0)
 	{
-		SetPixel(hdc, x, y, color);
+		SetPixel(hdc, x + x1, y + y1, color);
+		SetPixel(hdc, x + x1, -y + y1, color);
+		SetPixel(hdc, -x + x1, y + y1, color);
+		SetPixel(hdc, -x + x1, -y + y1, color);
 		if (c == 0)DiagonalStep(x, y, c);
 		else
 			if (c < 0)
